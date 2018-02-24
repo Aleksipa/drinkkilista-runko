@@ -2,12 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Drinkkilista</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Heippa vaan!</h1>
+        <h1>Drinkkilista</h1>
+        
+        
+        
+        <ol>
+            <li th:each="opiskelija: ${opiskelijat}">
+                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">linkki</a>
+            </li>
+        </ol>
 
         <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 

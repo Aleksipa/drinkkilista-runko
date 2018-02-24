@@ -5,7 +5,7 @@ import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
+import tikape.runko.database.DrinkkiDao;
 
 public class Main {
 
@@ -13,11 +13,12 @@ public class Main {
         Database database = new Database("jdbc:sqlite:opiskelijat.db");
         database.init();
 
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        DrinkkiDao opiskelijaDao = new DrinkkiDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
+            map.put("opiskelijat", opiskelijaDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
