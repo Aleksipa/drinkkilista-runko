@@ -80,5 +80,61 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
         connection.close();
     
     }
+    // Tallentaa tai päivittää Drinkin. Jos drinkillä ei ole asetettuna 
+    // pääavainta, drinkki tallennetaan tietokantaan. Jos pääavain on asetettu, 
+    // vanhan drinkin tiedot tulee päivittää
+    @Override
+    public Drinkki saveOrUpdate(Drinkki drinkki) throws SQLException {
+        if (drinkki.getId() == null) {
+            return save(drinkki);
+        } else {
+            return update(drinkki);
+        }
+    }
+    private Drinkki save(Drinkki drinkki) throws SQLException {
+
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Drinkki"
+                + " (id, nimi)"
+                + " VALUES (?, ?)");
+        stmt.setInt(1, drinkki.getId());
+        stmt.setString(2, drinkki.getNimi());
+
+        stmt.executeUpdate();
+        stmt.close();
+
+        stmt = conn.prepareStatement("SELECT * FROM Drinkki"
+                + " WHERE nimi = ? AND puhelinnumero = ?");
+        stmt.setInt(1, drinkki.getId());
+        stmt.setString(2, drinkki.getNimi());
+
+        ResultSet rs = stmt.executeQuery();
+        rs.next(); // vain 1 tulos
+
+        Drinkki d = new Drinkki(rs.getInt("id"), rs.getString("nimi"));
+
+        stmt.close();
+        rs.close();
+
+        conn.close();
+
+        return d;
+    }
+
+    private Drinkki update(Drinkki drinkki) throws SQLException {
+
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("UPDATE Drinkki SET"
+                + "nimi = ? WHERE id = ?");
+        stmt.setString(1, drinkki.getNimi());
+        stmt.setInt(2, drinkki.getId());
+
+        stmt.executeUpdate();
+
+        stmt.close();
+        conn.close();
+
+        return drinkki;
+    }
 
 }
