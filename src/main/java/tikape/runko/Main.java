@@ -36,5 +36,12 @@ public class Main {
 
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());
+        
+         get("/ainekset", (req, res) -> {
+            HashMap map = new HashMap<>();
+             map.put("opiskelijat", opiskelijaDao.findAll());
+
+            return new ModelAndView(map, "ainekset");
+        }, new ThymeleafTemplateEngine());
     }
 }
