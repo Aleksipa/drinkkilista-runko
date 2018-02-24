@@ -17,7 +17,6 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
             map.put("opiskelijat", opiskelijaDao.findAll());
 
             return new ModelAndView(map, "index");
