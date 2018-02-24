@@ -10,6 +10,9 @@ import tikape.runko.database.DrinkkiDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        
+        System.out.println("Drinkkejä täältä!");
+        
         Database database = new Database("jdbc:sqlite:opiskelijat.db");
         database.init();
 
