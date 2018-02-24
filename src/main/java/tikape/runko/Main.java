@@ -11,35 +11,35 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         
-        Database database = new Database("jdbc:sqlite:opiskelijat.db");
+        Database database = new Database("jdbc:sqlite:drinkki.db");
         database.init();
 
-        DrinkkiDao opiskelijaDao = new DrinkkiDao(database);
+        DrinkkiDao drinkkiDao = new DrinkkiDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
+            map.put("drinkit", drinkkiDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
+            map.put("drinkit", drinkkiDao.findAll());
 
-            return new ModelAndView(map, "opiskelijat");
+            return new ModelAndView(map, "drinkit");
         }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("drinkit", drinkkiDao.findOne(Integer.parseInt(req.params("id"))));
 
-            return new ModelAndView(map, "opiskelija");
+            return new ModelAndView(map, "drinkki");
         }, new ThymeleafTemplateEngine());
         
          get("/ainekset", (req, res) -> {
             HashMap map = new HashMap<>();
-             map.put("opiskelijat", opiskelijaDao.findAll());
+             map.put("drinkki", drinkkiDao.findAll());
 
             return new ModelAndView(map, "ainekset");
         }, new ThymeleafTemplateEngine());
