@@ -7,6 +7,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.DrinkkiDao;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.domain.Drinkki;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -60,9 +61,9 @@ public class Main {
         post("/drinkit", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("drinkit", drinkkiDao.findAll());
-            String drinkinNimi = req.queryParams("nimi");
+            String drinkinNimi = req.queryParams("aine");
 
-            raakaAineDao.saveOrUpdate(new RaakaAine(null, drinkinNimi));
+            drinkkiDao.saveOrUpdate(new Drinkki(-1, drinkinNimi));
             res.redirect("/ainekset");
             return "";
         });
