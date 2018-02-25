@@ -12,10 +12,10 @@ public class Database {
         this.databaseAddress = databaseAddress;
     }
 
-    /*  public Connection getConnection() throws SQLException {
+  /*    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(databaseAddress);
-    } */
-    public Connection getConnection() throws Exception {
+    } */ 
+    public Connection getConnection() throws SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         if (dbUrl != null && dbUrl.length() > 0) {
             return DriverManager.getConnection(dbUrl);
