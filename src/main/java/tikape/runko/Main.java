@@ -7,12 +7,14 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.DrinkkiDao;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.domain.RaakaAine;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        
+
         Database database = new Database("jdbc:sqlite:drinkki.db");
+
         database.init();
 
         DrinkkiDao drinkkiDao = new DrinkkiDao(database);
@@ -38,12 +40,31 @@ public class Main {
 
             return new ModelAndView(map, "drinkki");
         }, new ThymeleafTemplateEngine());
-        
-         get("/ainekset", (req, res) -> {
+
+        get("/ainekset", (req, res) -> {
             HashMap map = new HashMap<>();
-             map.put("drinkki", drinkkiDao.findAll());
+            map.put("raakaAine", drinkkiDao.findAll());
 
             return new ModelAndView(map, "ainekset");
         }, new ThymeleafTemplateEngine());
+
+        post("/ainekset", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("raakaAine", raakaAineDao.findAll());
+            String raakaAineenNimi = req.queryParams("nimi");
+
+            raakaAineDao.saveOrUpdate(new RaakaAine(null, raakaAineenNimi));
+            res.redirect("/ainekset");
+            return "";
+        });
+        post("/drinkit", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("drinkit", drinkkiDao.findAll());
+            String drinkinNimi = req.queryParams("nimi");
+
+            raakaAineDao.saveOrUpdate(new RaakaAine(null, drinkinNimi));
+            res.redirect("/ainekset");
+            return "";
+        });
     }
 }

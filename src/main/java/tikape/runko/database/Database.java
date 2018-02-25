@@ -43,6 +43,10 @@ public class Database {
         lista.add("INSERT INTO Drinkki (nimi) VALUES ('Gintonic');");
         lista.add("INSERT INTO Drinkki (nimi) VALUES ('Whiskey sour');");
         lista.add("INSERT INTO Drinkki (nimi) VALUES ('Ville vallaton');");
+        lista.add("CREATE TABLE RaakaAine (id integer PRIMARY KEY, nimi varchar(255));");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Appelsiinimehu');");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Mandariinimehu');");
+        lista.add("INSERT INTO RaakaAine (nimi) VALUES ('Maito');");
 
         return lista;
     }
