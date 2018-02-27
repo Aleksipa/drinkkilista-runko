@@ -86,7 +86,7 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
     // vanhan drinkin tiedot tulee päivittää
     @Override
     public Drinkki saveOrUpdate(Drinkki drinkki) throws SQLException {
-        if (drinkki.getId() == null) {
+        if (drinkki.getId() == -1) {
             return save(drinkki);
         } else {
             return update(drinkki);
@@ -105,7 +105,7 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
         stmt.executeUpdate();
         stmt.close();
 
-        stmt = conn.prepareStatement("SELECT * FROM Drinkki"
+   /*     stmt = conn.prepareStatement("SELECT * FROM Drinkki"
                 + " WHERE id = ? AND nimi = ?");
         stmt.setInt(1, drinkki.getId());
         stmt.setString(2, drinkki.getNimi());
@@ -120,7 +120,9 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
 
         conn.close();
 
-        return d;
+        return d; */
+        
+        return this.findOne(drinkki.getId());
     }
 
     private Drinkki update(Drinkki drinkki) throws SQLException {

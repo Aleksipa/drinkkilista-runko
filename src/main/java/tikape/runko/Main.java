@@ -64,7 +64,7 @@ public class Main {
             String drinkinNimi = req.queryParams("aine");
 
             drinkkiDao.saveOrUpdate(new Drinkki(-1, drinkinNimi));
-            res.redirect("/ainekset");
+            res.redirect("/drinkit");
             return "";
         });
     }
