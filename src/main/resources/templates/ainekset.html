@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
     <head>
         <title>Raaka-aineet</title>
        
@@ -13,11 +13,9 @@ and open the template in the editor.
        <h2>Raaka-aineet</h2>
   
   <ul>
-    <li>Appelsiini <a href="1/poista">(poista)</a></li>
-    <li>Banaani <a href="2/poista">(poista)</a></li>
-    <li>Maito <a href="3/poista">(poista)</a></li>
-    <li>Mandariini <a href="4/poista">(poista)</a></li>
-    <li>Mansikka <a href="5/poista">(poista)</a></li>
+    <li th:each="drinkki: ${drinkit}">
+        <span th:text="${drinkki.nimi}">drinkin nimi</span>
+    </li>
   </ul>
 
   <h4>Lisää uusi raaka-aine</h4>
