@@ -6,8 +6,10 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.DrinkkiDao;
+import tikape.runko.database.DrinkkiRaakaAineDao;
 import tikape.runko.database.RaakaAineDao;
 import tikape.runko.domain.Drinkki;
+import tikape.runko.domain.DrinkkiRaakaAine;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -20,6 +22,7 @@ public class Main {
 
         DrinkkiDao drinkkiDao = new DrinkkiDao(database);
         RaakaAineDao raakaAineDao = new RaakaAineDao(database);
+        DrinkkiRaakaAineDao drinkkiRaakaAineDao = new DrinkkiRaakaAineDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -58,12 +61,26 @@ public class Main {
             res.redirect("/ainekset");
             return "";
         });
-        post("/drinkit", (req, res) -> {
+        post("/ykkoslomake", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("drinkit", drinkkiDao.findAll());
             String drinkinNimi = req.queryParams("aine");
 
             drinkkiDao.saveOrUpdate(new Drinkki(-1, drinkinNimi));
+            res.redirect("/drinkit");
+            return "";
+        });
+        post("/kakkoslomake", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("drinkit", drinkkiDao.findAll());
+            
+            String drinkinNimi = req.queryParams("valittuDrinkki");
+            String raakaAineenNimi = req.queryParams("valittuRaakaAine");
+            Integer lukumaara = Integer.parseInt(req.queryParams("annettuMaara"));
+            Integer jarjestys = Integer.parseInt(req.queryParams("annettuJarjestys"));
+            String ohje = req.queryParams("annettuOhje");
+
+            drinkkiRaakaAineDao.saveOrUpdate(new DrinkkiRaakaAine(-1, drinkinNimi, raakaAineenNimi, lukumaara, jarjestys, ohje));
             res.redirect("/drinkit");
             return "";
         });

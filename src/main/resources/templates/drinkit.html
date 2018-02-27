@@ -11,7 +11,7 @@
 
         <h4>Lisää uusi</h4>
 
-        <form method="POST" action="">
+        <form method="POST" action="ykkoslomake">
             Drinkin nimi:<br/>
             <input type="text" name="aine"/><br/>
             <input type="submit" value="Lisää"/>
@@ -19,25 +19,25 @@
 
         <h4>Lisää raaka-aineita</h4>
 
-        <form method="POST" action="">
+        <form method="POST" action="kakkoslomake">
             Drinkin nimi:<br/>
-            <select name="smoothie">
+            <select name="valittuDrinkki">
                 <option th:each="drinkki: ${drinkit}" 
                         th:value="${drinkki.id}" th:text="${drinkki.nimi}">Drinkki</option>
             </select>
             <br/>
             Lisättävä raaka-aine<br/>
-            <select name="raakaAine">
+            <select name="valittuRaakaAine">
                 <option th:each="raakaaine: ${raakaaineet}" 
                         th:value="${raakaaine.id}" th:text="${raakaaine.nimi}">RaakaAine</option>
             </select>
             <br/>
             Järjestys<br/>
-            <input type="text"/><br/>
+            <input type="text" name="annettuJarjestys"/><br/>
             Määrä<br/>
-            <input type="text"/><br/>
+            <input type="text" name="annettuMaara"/><br/>
             Ohje<br/>
-            <input type="text"/><br/>
+            <input type="text" name="annettuOhje"/><br/>
             <input type="submit" value="Lisää"/>
         </form>
 
