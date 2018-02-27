@@ -31,7 +31,7 @@ public class Main {
         get("/drinkit", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("drinkit", drinkkiDao.findAll());
-
+            map.put("raakaaineet", raakaAineDao.findAll());
             return new ModelAndView(map, "drinkit");
         }, new ThymeleafTemplateEngine());
 
