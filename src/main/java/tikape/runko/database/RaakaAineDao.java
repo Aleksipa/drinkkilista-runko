@@ -105,7 +105,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         stmt.executeUpdate();
         stmt.close();
 
- /*       stmt = conn.prepareStatement("SELECT * FROM RaakaAine"
+        /*       stmt = conn.prepareStatement("SELECT * FROM RaakaAine"
                 + " WHERE id = ? AND nimi = ?");
         stmt.setInt(1, raakaAine.getId());
         stmt.setString(2, raakaAine.getNimi());
@@ -121,8 +121,9 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         conn.close();
 
         return d; */
- return this.findOne(raakaAine.getId());
         
+        return this.findOne(raakaAine.getId());
+
     }
 
     private RaakaAine update(RaakaAine raakaAine) throws SQLException {

@@ -52,7 +52,7 @@ public class Main {
         post("/ainekset", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("raakaAine", raakaAineDao.findAll());
-            String raakaAineenNimi = req.queryParams("nimi");
+            String raakaAineenNimi = req.queryParams("aine");
 
             raakaAineDao.saveOrUpdate(new RaakaAine(-1, raakaAineenNimi));
             res.redirect("/ainekset");
