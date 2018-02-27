@@ -99,7 +99,7 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO Drinkki"
                 + " (id, nimi)"
                 + " VALUES (?, ?)");
-        stmt.setInt(1, drinkki.getId());
+ //       stmt.setInt(1, drinkki.getId());
         stmt.setString(2, drinkki.getNimi());
 
         stmt.executeUpdate();
