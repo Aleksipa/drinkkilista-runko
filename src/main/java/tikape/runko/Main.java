@@ -54,7 +54,7 @@ public class Main {
             map.put("raakaAine", raakaAineDao.findAll());
             String raakaAineenNimi = req.queryParams("nimi");
 
-            raakaAineDao.saveOrUpdate(new RaakaAine(null, raakaAineenNimi));
+            raakaAineDao.saveOrUpdate(new RaakaAine(-1, raakaAineenNimi));
             res.redirect("/ainekset");
             return "";
         });

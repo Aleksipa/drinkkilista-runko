@@ -69,41 +69,43 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        
-    Connection connection = database.getConnection();
-    PreparedStatement stmt = connection.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
-    
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
+
         stmt.setInt(1, key);
         stmt.executeUpdate();
 
         stmt.close();
         connection.close();
-    
+
     }
+
     // Tallentaa tai päivittää Drinkin. Jos drinkillä ei ole asetettuna 
     // pääavainta, drinkki tallennetaan tietokantaan. Jos pääavain on asetettu, 
     // vanhan drinkin tiedot tulee päivittää
     @Override
     public RaakaAine saveOrUpdate(RaakaAine raakaAine) throws SQLException {
-        if (raakaAine.getId() == null) {
+        if (raakaAine.getId() == -1) {
             return save(raakaAine);
         } else {
             return update(raakaAine);
         }
     }
+
     private RaakaAine save(RaakaAine raakaAine) throws SQLException {
 
         Connection conn = database.getConnection();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine"
                 + " (id, nimi)"
                 + " VALUES (?, ?)");
-        stmt.setInt(1, raakaAine.getId());
+//        stmt.setInt(1, raakaAine.getId());
         stmt.setString(2, raakaAine.getNimi());
 
         stmt.executeUpdate();
         stmt.close();
 
-        stmt = conn.prepareStatement("SELECT * FROM RaakaAine"
+ /*       stmt = conn.prepareStatement("SELECT * FROM RaakaAine"
                 + " WHERE id = ? AND nimi = ?");
         stmt.setInt(1, raakaAine.getId());
         stmt.setString(2, raakaAine.getNimi());
@@ -118,7 +120,9 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         conn.close();
 
-        return d;
+        return d; */
+ return this.findOne(raakaAine.getId());
+        
     }
 
     private RaakaAine update(RaakaAine raakaAine) throws SQLException {

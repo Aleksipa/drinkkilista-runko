@@ -69,17 +69,18 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        
-    Connection connection = database.getConnection();
-    PreparedStatement stmt = connection.prepareStatement("DELETE FROM Opiskelija WHERE id = ?");
-    
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Opiskelija WHERE id = ?");
+
         stmt.setInt(1, key);
         stmt.executeUpdate();
 
         stmt.close();
         connection.close();
-    
+
     }
+
     // Tallentaa tai päivittää Drinkin. Jos drinkillä ei ole asetettuna 
     // pääavainta, drinkki tallennetaan tietokantaan. Jos pääavain on asetettu, 
     // vanhan drinkin tiedot tulee päivittää
@@ -91,6 +92,7 @@ public class DrinkkiDao implements Dao<Drinkki, Integer> {
             return update(drinkki);
         }
     }
+
     private Drinkki save(Drinkki drinkki) throws SQLException {
 
         Connection conn = database.getConnection();
