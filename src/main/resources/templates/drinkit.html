@@ -8,45 +8,44 @@
 
     <body>
         <h1>Drinkit</h1>
-        
+
         <h4>Lisää uusi</h4>
-  
-  <form method="POST" action="">
-      Drinkin nimi:<br/>
-      <input type="text" name="aine"/><br/>
-      <input type="submit" value="Lisää"/>
-  </form>
-        
-         <h4>Lisää raaka-aineita</h4>
 
-  <form method="POST" action="">
-      Drinkin nimi:<br/>
-      <select name="smoothie">
-        <option name="2">Aurinkolasit</option>
-        <option name="1">Mustikkaplorays</option>
-      </select>
-      <br/>
-      Lisättävä raaka-aine<br/>
-      <select name="raakaAine">
-        <option name="1">Appelsiini</option>
-        <option name="2">Banaani</option>
-        <option name="...">...</option>
-      </select>
-      <br/>
-      Järjestys<br/>
-      <input type="text"/><br/>
-      Määrä<br/>
-      <input type="text"/><br/>
-      Ohje<br/>
-      <input type="text"/><br/>
-      <input type="submit" value="Lisää"/>
-  </form>
+        <form method="POST" action="">
+            Drinkin nimi:<br/>
+            <input type="text" name="aine"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
 
-  <ul>
-    <li>
-      <a href="../">Drinkkilistaukseen</a>
-    </li>
-  </ul>
-        
+        <h4>Lisää raaka-aineita</h4>
+
+        <form method="POST" action="">
+            Drinkin nimi:<br/>
+            <select name="smoothie">
+                <option th:each="drinkki: ${drinkit}" 
+                        th:value="${drinkki.id}" th:text="${drinkki.nimi}">Drinkki</option>
+            </select>
+            <br/>
+            Lisättävä raaka-aine<br/>
+            <select name="raakaAine">
+                <option th:each="ainekset: ${ainekset}" 
+                        th:value="${raakaaine.id}" th:text="${raakaaine.nimi}">RaakaAine</option>
+            </select>
+            <br/>
+            Järjestys<br/>
+            <input type="text"/><br/>
+            Määrä<br/>
+            <input type="text"/><br/>
+            Ohje<br/>
+            <input type="text"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+
+        <ul>
+            <li>
+                <a href="../">Drinkkilistaukseen</a>
+            </li>
+        </ul>
+
     </body>
 </html>
