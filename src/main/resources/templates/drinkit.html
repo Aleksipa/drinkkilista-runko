@@ -41,6 +41,18 @@
             <input type="submit" value="Lisää"/>
         </form>
 
+        <form method="POST" action="poistolomake">
+            
+            <h4>Poista drinkkejä</h4>
+            
+            Valitse poistettava drinkki:<br/>
+            <select name="poistettavaDrinkki">
+                <option th:each="drinkki: ${drinkit}" 
+                        th:value="${drinkki.id}" th:text="${drinkki.nimi}">Drinkki</option>
+            </select>
+            <input type="submit" value="Poista"/>
+        </form>
+
         <ul>
             <li>
                 <a href="../">Drinkkilistaukseen</a>

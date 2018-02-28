@@ -89,5 +89,17 @@ public class Main {
             res.redirect("/drinkit");
             return "";
         });
+        post("/drinkkienPoistolomake", (req, res) -> {
+
+            drinkkiDao.delete(Integer.parseInt(req.queryParams("poistettavaDrinkki")));
+            res.redirect("/drinkit");
+            return "";
+        });
+        post("/raakaAineidenPoistolomake", (req, res) -> {
+            
+            raakaAineDao.delete(Integer.parseInt(req.queryParams("poistettavaRaakaAine")));
+            res.redirect("/ainekset");
+            return "";
+        });
     }
 }
