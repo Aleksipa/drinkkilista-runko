@@ -96,8 +96,8 @@ public class DrinkkiRaakaAineDao implements Dao<DrinkkiRaakaAine, Integer> {
         if (drinkkiRaakaAine.getId() == -1) {
             return save(drinkkiRaakaAine);
         } else {
-            //       return update(DrinkkiRaakaAine);
-            return null;
+            return update(drinkkiRaakaAine);
+
         }
     }
 
@@ -139,19 +139,24 @@ public class DrinkkiRaakaAineDao implements Dao<DrinkkiRaakaAine, Integer> {
 
     }
 
-    /*  private DrinkkiRaakaAine update(DrinkkiRaakaAine DrinkkiRaakaAine) throws SQLException {
+    private DrinkkiRaakaAine update(DrinkkiRaakaAine object) throws SQLException {
 
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET"
-                + "nimi = ? WHERE id = ?");
-        stmt.setString(1, DrinkkiRaakaAine.getNimi());
-        stmt.setInt(2, raakaAine.getId());
+        PreparedStatement stmt = conn.prepareStatement("UPDATE DrinkkiRaakaAine SET"
+                + " (id, drinkkiId, raakaAineId, lukumaara, jarjestys, ohje)"
+                + " VALUES (?, ?, ?, ?, ?, ?)");
+//      
+
+        stmt.setString(2, object.getDrinkkiId());
+        stmt.setString(3, object.getRaakaAineId());
+
+        stmt.setInt(4, object.getJarjestys());
+        stmt.setInt(5, object.getLukumaara());
+        stmt.setString(6, object.getOhje());
 
         stmt.executeUpdate();
-
         stmt.close();
-        conn.close();
 
-        return raakaAine;
-    } */
+        return this.findOne(object.getId());
+    }
 }

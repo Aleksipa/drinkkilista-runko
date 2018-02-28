@@ -2,6 +2,7 @@ package tikape.runko;
 
 import java.util.HashMap;
 import spark.ModelAndView;
+import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
@@ -15,6 +16,10 @@ import tikape.runko.domain.RaakaAine;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
+        if (System.getenv("PORT") != null) {
+            Spark.port(Integer.valueOf(System.getenv("PORT")));
+        }
 
         Database database = new Database("jdbc:sqlite:drinkki.db");
 
@@ -73,7 +78,7 @@ public class Main {
         post("/kakkoslomake", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("drinkit", drinkkiDao.findAll());
-            
+
             String drinkinNimi = req.queryParams("valittuDrinkki");
             String raakaAineenNimi = req.queryParams("valittuRaakaAine");
             Integer lukumaara = Integer.parseInt(req.queryParams("annettuMaara"));
